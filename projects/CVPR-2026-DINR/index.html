@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>MMGN Project Page</title>
+  <title>DINR Project Page</title>
 
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
@@ -53,35 +53,24 @@
               
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
-              <span class="author-block"><a href="https://xihaier.github.io/" target="_blank">Xihaier Luo</a><sup>1, &dagger;</sup>,</span>
-              <span class="author-block"><a href="https://www.bnl.gov/staff/xuw" target="_blank">Wei Xu</a><sup>1</sup>,</span>
-              <span class="author-block"><a href="https://www.bnl.gov/staff/yren" target="_blank">Yihui Ren</a><sup>1</sup>,</span>
-              <span class="author-block"><a href="https://www.bnl.gov/staff/sjyoo" target="_blank">Shinjae Yoo</a><sup>1</sup>,</span>
-              <span class="author-block"><a href="https://public.lanl.gov/balu/" target="_blank">Balu Nadiga</a><sup>2</sup></span>
-                  
+              <span class="author-block"><a href="https://openreview.net/profile?id=~Yesom_Park1" target="_blank">Yesom Park</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://openreview.net/profile?id=~Kelvin_Kan1" target="_blank">Kelvin Kan</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://thomasflynn.org/" target="_blank">Thomas Flynn</a><sup>2</sup>,</span>   
+              <span class="author-block"><a href="https://pphuangyi.github.io/" target="_blank">Yi Huang</a><sup>2</sup>,</span>             
+              <span class="author-block"><a href="https://www.bnl.gov/staff/sjyoo" target="_blank">Shinjae Yoo</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://www.math.ucla.edu/~sjo/" target="_blank">Stanley Osher</a><sup>2</sup>,</span>              
+              <span class="author-block"><a href="https://xihaier.github.io/" target="_blank">Xihaier Luo</a><sup>2</sup></span>                  
             </div>
 
                   <div class="is-size-5 publication-authors">
-                    <span class="author-block"><sup>1</sup>Brookhaven National Laboratory<br><sup>2</sup>Los Alamos National Lab<br>The International Conference on Learning Representations (ICLR) 2024</span>
-                    <span class="eql-cntrb"><small><br><sup>&dagger;</sup>Indicates the corresponding author</small></span>
+                    <span class="author-block"><sup>1</sup>University of California, Los Angeles<br><sup>2</sup>Brookhaven National Laboratory</span>
                   </div>
 
                   <div class="column has-text-centered">
                     <div class="publication-links">
-                         <!-- Arxiv PDF link -->
-                      <span class="link-block">
-                        <a href="https://openreview.net/forum?id=kuTZMZdCPZ" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
 
-                  <!-- Github link -->
                   <span class="link-block">
-                    <a href="https://github.com/Xihaier/Continuous-Field-Reconstruction-MMGN" target="_blank"
+                    <a href="https://github.com/Xihaier/DINR" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
@@ -92,7 +81,7 @@
 
                 <!-- ArXiv abstract Link -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2401.11611 " target="_blank"
+                  <a href="https://github.com/Xihaier/DINR" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
@@ -100,18 +89,6 @@
                   <span>arXiv</span>
                 </a>
               </span>
-
-                    <!-- Supplementary PDF link -->
-                    <span class="link-block">
-                      <a href="https://drive.google.com/file/d/1V8DvkcWZrW2Z_4eaz4VjtMU8IvcLyyMe/view?usp=sharing" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <p>😀</p>
-                      </span>
-                      <span>Dataset</span>
-                    </a>
-                  </span>
-
             </div>
           </div>
         </div>
@@ -123,16 +100,13 @@
 
 
 <!-- Teaser video-->
-<section class="hero teaser">
+<!-- <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <img width="100%" src="imgs/problem.gif" style="display: block; margin-left: auto; margin-right: auto;">
-      <!-- <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2> -->
     </div>
   </div>
-</section>
+</section> -->
 <!-- End teaser video -->
 
 
@@ -145,7 +119,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Reliably reconstructing physical fields from sparse sensor data is a challenge that frequently arises in many scientific domains. In practice, the process generating the data often is not understood to sufficient accuracy. Therefore, there is a growing interest in using the deep neural network route to address the problem. This work presents a novel approach that learns a continuous representation of the physical field using implicit neural representations (INRs). Specifically, after factorizing spatiotemporal variability into spatial and temporal components using the separation of variables technique, the method learns relevant basis functions from sparsely sampled irregular data points to develop a continuous representation of the data. In experimental evaluations, the proposed model outperforms recent INR methods, offering superior reconstruction quality on simulation data from a state-of-the-art climate model and a second dataset that comprises ultra-high resolution satellite-based sea surface temperature fields.
+            Implicit Neural Representations (INRs) provide a powerful continuous framework for modeling complex visual and geometric signals, but spectral bias remains a fundamental challenge, limiting their ability to capture high-frequency details. Orthogonal to existing remedy strategies, we introduce Dynamical Implicit Neural Representations (DINR), a new INR modeling framework that treats feature evolution as a continuous-time dynamical system rather than a discrete stack of layers. This dynamical formulation mitigates spectral bias by enabling richer, more adaptive frequency representations through continuous feature evolution. Theoretical analysis based on Rademacher complexity and the Neural Tangent Kernel demonstrates that DINR enhances expressivity and improves training dynamics. Moreover, regularizing the complexity of the underlying dynamics provides a principled way to balance expressivity and generalization. Extensive experiments on image representation, field reconstruction, and data compression confirm that DINR delivers more stable convergence, higher signal fidelity, and stronger generalization than conventional static INRs.
           </p>
         </div>
       </div>
@@ -154,7 +128,19 @@
 </section>
 <!-- End paper abstract -->
 
-
+<!-- Introduction -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- Paper video. -->
+      <h2 class="title is-3">Introduction</h2>
+      <div>
+        Modern science is awash with rich, high-resolution data, from turbulent flows and weather fields to 3D volumes and complex visual scenes, but turning all of this into compact, faithful digital representations is still surprisingly hard ⚙️. Our project tackles this challenge with Dynamical Implicit Neural Representations (DINR), a new approach that treats learned features not as a static output of a network, but as a smooth trajectory evolving in time under a learned dynamical system. By letting representations “flow” through this continuous evolution, DINR can naturally capture fine, high-frequency details that standard neural fields struggle with, while remaining compact, stable, and data-efficient 🚀.
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Introduction -->
 
 <!-- Method -->
 <section class="hero is-small">
@@ -163,8 +149,8 @@
       <!-- Paper video. -->
       <h2 class="title is-3">Method</h2>
       <div>
-        Conventional spatiotemporal disentangled representation utilizes the time index (t) primarily as a reference to indicate a specific time instance. Motivated by the desire for a more context-aware indexing mechanism, we pose the question: <strong><em>Can the pointing process be improved?</em></strong> A natural approach to incorporate available context information in field reconstruction involves using measurements of the underlying physical process at time $t$. As the number and positions of available measurements change over time, we propose a design wherein an encoder extracts a latent representation from actual measurements. This latent representation is subsequently employed to guide the model to the target time instance. When coupled with an INR-based decoder, this proposed method achieves continuous field reconstruction.
-        <img width="70%" src="imgs/method.png" style="display: block; margin-left: auto; margin-right: auto;">
+        The proposed method, Dynamical Implicit Neural Representations (DINR), upgrades standard coordinate-based INRs by replacing their one-shot latent mapping with a learned continuous-time flow in feature space. Given an input coordinate, DINR first embeds it into a latent vector and then treats that vector as the initial condition of a neural ODE: a small network defines a vector field that drives how the latent state evolves over an artificial “time” axis, and an ODE solver follows this trajectory to a final state that is decoded into the target signal value. This viewpoint turns the middle of the network into many tiny, coupled transformations rather than a fixed stack of layers, greatly enlarging the class of functions the model can represent and allowing fine, high-frequency structure to emerge gradually along the trajectory. To keep these dynamics smooth, stable, and physically intuitive, we introduce a kinetic-energy regularizer that penalizes unnecessarily fast or twisting motion in feature space, encouraging efficient latent paths that still retain expressive power while adding almost no computational overhead. The full DINR model is trained end-to-end with a standard reconstruction loss plus this regularizer, yielding a plug-and-play, model-agnostic module that injects rich latent dynamics into existing INR backbones without increasing their depth or parameter count. 
+
       </div>
     </div>
   </div>
@@ -178,63 +164,44 @@
   <div class="hero-body">
     <div class="container">
       <!-- Paper video. -->
-      <h2 class="title is-3">Model</h2>
+      <h2 class="title is-3">Results</h2>
       <div>
         We introduce a neural network reconstruction method, <strong><em>MMGN (Multiplicative and Modulated Gabor Network)</em></strong>, that features an encoder-decoder architecture.
-        <img width="70%" src="imgs/model.gif" style="display: block; margin-left: auto; margin-right: auto;">
+<div style="display: flex; justify-content: center; gap: 1px; align-items: flex-start;">
+  <div style="text-align: center;">
+    <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">FFNet</div>
+    <img src="imgs/FFNet.gif" style="width: 90%;">
+  </div>
+
+  <div style="text-align: center;">
+    <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">Dynamical FFNet</div>
+    <img src="imgs/OCFFNet.gif" style="width: 90%;">
+  </div>
+</div>
+
+<div style="display: flex; justify-content: center; gap: 1px; align-items: flex-start;">
+  <div style="text-align: center;">
+    <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">SIREN</div>
+    <img src="imgs/SIREN.gif" style="width: 90%;">
+  </div>
+
+  <div style="text-align: center;">
+    <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">Dynamical SIREN</div>
+    <img src="imgs/OCSIREN.gif" style="width: 90%;">
+  </div>
+</div>
       </div>
     </div>
   </div>
 </section>
 <!-- Model -->
 
-
-
-<!-- Quantitative Results -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Quantitative Results</h2>
-      <div>
-        Performance comparison with four INR baselines on both high-fidelity climate simulation data and real-world satellite-based benchmarks. MSE is recorded. A smaller MSE denotes superior performance. For clarity, we highlight the best result in bold and underline the second-best. We have also included the promotion metric, which indicates the reduction in relative error compared to the second-best model for each task.
-        <img width="70%" src="imgs/quan.png" style="display: block; margin-left: auto; margin-right: auto;">
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Quantitative Results -->
-
-
-
-<!-- Qualitative Results -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Qualitative Results</h2>
-      <div>
-        Visualizations of true and reconstructed fields: (1) global surface temperature derived from multi-scale high-fidelity climate simulations and (2) sea surface temperature assimilated using satellite imagery observations. For each dataset, the first column displays the ground truth, the first row showcases predictions from different models, and the second row presents corresponding error maps relative to the reference data. In the error maps, darker pixels indicate lower error levels.
-        <img width="70%" src="imgs/qual.png" style="display: block; margin-left: auto; margin-right: auto;">
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Qualitative Results -->
-
-
-
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>@inproceedings{
-        luo2024continuous,
-        title={Continuous Field Reconstruction from Sparse Observations with Implicit Neural Networks},
-        author={Xihaier Luo and Wei Xu and Balu Nadiga and Yihui Ren and Shinjae Yoo},
-        booktitle={The Twelfth International Conference on Learning Representations},
-        year={2024},
-        url={https://openreview.net/forum?id=kuTZMZdCPZ}
+        comingsoon}
         }</code></pre>
     </div>
 </section>
@@ -247,20 +214,14 @@
       <div class="column is-8">
         <div class="content">
           
-            <p style="text-align: center;">"你们中间若有缺少智慧的，应当求那厚赐与众人、也不斥责人的 神，主就必赐给他。" - 雅各书 1:5</p>
-            <p style="text-align: center;">"If any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach, and it will be given to him." - James 1:5</p>
+            <p style="text-align: center;">"惟独从上头来的智慧，先是清洁，后是和平，温良柔顺，满有怜悯，多结善果，没有偏见，没有假冒。" - 雅各书 3:17</p>
+            <p style="text-align: center;">"But the wisdom that is from above is first pure, then peaceable, gentle, and easy to be intreated, full of mercy and good fruits, without partiality, and without hypocrisy." - James 3:17</p>
 
         </div>
       </div>
     </div>
   </div>
 </footer>
-
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
 
   </body>
   </html>
