@@ -143,7 +143,7 @@
 <!-- Introduction -->
 
 <!-- Method -->
-<section class="hero is-small">
+<section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
       <!-- Paper video. -->
@@ -160,13 +160,12 @@
 
 
 <!-- Model -->
-<section class="hero is-small is-light">
+<section class="hero is-small">
   <div class="hero-body">
     <div class="container">
       <!-- Paper video. -->
       <h2 class="title is-3">Results</h2>
       <div>
-        We introduce a neural network reconstruction method, <strong><em>MMGN (Multiplicative and Modulated Gabor Network)</em></strong>, that features an encoder-decoder architecture.
 <div style="display: flex; justify-content: center; gap: 1px; align-items: flex-start;">
   <div style="text-align: center;">
     <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">FFNet</div>
@@ -196,12 +195,38 @@
 </section>
 <!-- Model -->
 
+
+
+<!-- Method -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <!-- Paper video. -->
+      <h2 class="title is-3">Next Steps</h2>
+      <div>
+        For future work, it is important to address the increased computational cost of the dynamical structure, potentially by exploring adaptive step-size or higher-order ODE integration to balance expressivity and efficiency. Extending DINR to multi-modal and large-scale datasets could broaden its practical applicability. Given the observed effectiveness of dynamical neural architectures in time-series and generative modeling, exploring a unified understanding of such architectures could provide valuable insights and guide the design of more effective models across diverse tasks. Finally, a more rigorous theoretical study of the interplay between latent dynamics, expressivity, and generalization would yield deeper insights into the framework and guide the design of even more powerful INRs.
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Method -->
+
+
+
+
+
+
+
 <!--BibTex citation -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@inproceedings{
-        comingsoon}
+      <pre><code>@article{park2025dynamical,
+  title={Dynamical Implicit Neural Representations},
+  author={Park, Yesom and Kan, Kelvin and Flynn, Thomas and Huang, Yi and Yoo, Shinjae and Osher, Stanley and Luo, Xihaier},
+  journal={arXiv preprint arXiv:2511.21787},
+  year={2025}
+}
         }</code></pre>
     </div>
 </section>
