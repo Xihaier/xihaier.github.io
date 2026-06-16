@@ -1,4 +1,4 @@
-# Xihaier Luo Personal Website
+# Personal Website
 
 Source code for my personal academic website hosted with GitHub Pages.
 
