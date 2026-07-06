@@ -1,38 +1,656 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="DESCRIPTION META TAG">
-  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
-  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="imgs/FFNet.gif" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+  <meta name="description" content="Project page for DINR: Dynamical Implicit Neural Representations, a dynamical latent-evolution framework for implicit neural representations.">
+  <meta property="og:title" content="DINR: Dynamical Implicit Neural Representations">
+  <meta property="og:description" content="DINR introduces continuous latent dynamics for implicit neural representations, improving expressivity, trainability, and high-frequency reconstruction across visual and scientific data.">
+  <meta property="og:url" content="https://xihaier.github.io/projects/CVPR-2026-DINR/">
+  <meta property="og:image" content="imgs/FFNet.gif">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-
-  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
-  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:title" content="DINR: Dynamical Implicit Neural Representations">
+  <meta name="twitter:description" content="A dynamical latent-evolution framework for implicit neural representations with stronger high-frequency fidelity and training dynamics.">
   <meta name="twitter:image" content="imgs/FFNet.gif">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="keywords" content="implicit neural representations, neural ODE, dynamical systems, spectral bias, scientific data compression, neural fields">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-  <title>DINR Project Page</title>
+  <title>DINR: Dynamical Implicit Neural Representations</title>
 
   <link rel="stylesheet" href="../../assets/css/vendor/bulma/bulma.min.css">
   <link rel="stylesheet" href="../../assets/css/vendor/bulma/bulma-carousel.min.css">
   <link rel="stylesheet" href="../../assets/css/vendor/bulma/bulma-slider.min.css">
   <link rel="stylesheet" href="../../assets/css/vendor/fontawesome/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="../../assets/css/project-page.css">
+
+  <style>
+    :root {
+      --dinr-navy: #0f2338;
+      --dinr-slate: #425267;
+      --dinr-muted: #66758a;
+      --dinr-line: #dce6f2;
+      --dinr-soft: #f5f8fc;
+      --dinr-blue: #2563eb;
+      --dinr-cyan: #08a7c4;
+      --dinr-green: #1f9d77;
+      --dinr-amber: #b7791f;
+      --dinr-card: #ffffff;
+      --dinr-shadow: 0 18px 45px rgba(15, 35, 56, 0.09);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      color: var(--dinr-navy);
+      background: #ffffff;
+      font-size: 16px;
+    }
+
+    a {
+      color: var(--dinr-blue);
+    }
+
+    a:hover {
+      color: #1740a8;
+    }
+
+    .project-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--dinr-line);
+      backdrop-filter: blur(14px);
+    }
+
+    .project-nav .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.65rem 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .project-nav a {
+      color: var(--dinr-slate);
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+    }
+
+    .project-nav a:hover,
+    .project-nav a:focus {
+      background: #eaf2ff;
+      color: var(--dinr-blue);
+      outline: none;
+    }
+
+    .project-hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(8, 167, 196, 0.15), transparent 34%),
+        linear-gradient(135deg, #f8fbff 0%, #eef6ff 55%, #ffffff 100%);
+      border-bottom: 1px solid var(--dinr-line);
+    }
+
+    .project-hero .hero-body {
+      padding: 4.25rem 1.5rem 3.4rem;
+    }
+
+    .publication-title {
+      color: var(--dinr-navy);
+      font-size: 2.65rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+      margin-bottom: 1.1rem;
+    }
+
+    .publication-authors {
+      color: var(--dinr-slate);
+      line-height: 1.65;
+    }
+
+    .author-block {
+      display: inline-block;
+      margin: 0 0.12rem;
+    }
+
+    .affiliations {
+      margin-top: 0.65rem;
+      color: var(--dinr-muted);
+    }
+
+    .tagline {
+      max-width: 820px;
+      margin: 1.3rem auto 0;
+      color: var(--dinr-slate);
+      font-size: 1.12rem;
+      line-height: 1.65;
+    }
+
+    .tag-row,
+    .chip-row,
+    .publication-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+
+    .tag-row {
+      margin-top: 1.25rem;
+    }
+
+    .paper-pill,
+    .metric-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      border-radius: 999px;
+      border: 1px solid #c9def8;
+      background: #ffffff;
+      color: #1f4b79;
+      font-size: 0.86rem;
+      font-weight: 700;
+      padding: 0.38rem 0.72rem;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.07);
+    }
+
+    .hero-links {
+      margin-top: 1.45rem;
+    }
+
+    .hero-links .button {
+      border: 0;
+      box-shadow: 0 12px 24px rgba(15, 35, 56, 0.16);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 2rem auto 0;
+      max-width: 980px;
+    }
+
+    .stat-card,
+    .method-card,
+    .rq-card,
+    .gif-card {
+      background: var(--dinr-card);
+      border: 1px solid var(--dinr-line);
+      border-radius: 8px;
+      box-shadow: var(--dinr-shadow);
+    }
+
+    .stat-card {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .stat-label {
+      display: block;
+      color: var(--dinr-muted);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      display: block;
+      color: var(--dinr-navy);
+      font-size: 0.97rem;
+      line-height: 1.42;
+      margin-top: 0.28rem;
+      font-weight: 700;
+    }
+
+    .section-block {
+      padding: 4.2rem 1.5rem;
+    }
+
+    .section-soft {
+      background: var(--dinr-soft);
+      border-top: 1px solid var(--dinr-line);
+      border-bottom: 1px solid var(--dinr-line);
+    }
+
+    .section-heading {
+      max-width: 820px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+
+    .section-heading .eyebrow {
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      color: var(--dinr-cyan);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0.65rem;
+    }
+
+    .section-heading h2,
+    .section-title {
+      color: var(--dinr-navy);
+      font-size: 2rem;
+      line-height: 1.18;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading p,
+    .overview-copy,
+    .caption,
+    .rq-copy,
+    .limitations-copy {
+      color: var(--dinr-slate);
+      line-height: 1.7;
+    }
+
+    .overview-copy {
+      font-size: 1.03rem;
+    }
+
+    .caption {
+      font-size: 0.92rem;
+      margin-top: 0.8rem;
+    }
+
+    .figure-slot {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--dinr-line);
+      background: #f8fbff;
+      margin: 0;
+    }
+
+    .figure-slot img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .figure-slot figcaption {
+      border-top: 1px solid var(--dinr-line);
+      background: #ffffff;
+      color: var(--dinr-slate);
+      font-size: 0.9rem;
+      line-height: 1.58;
+      padding: 0.85rem 1rem;
+    }
+
+    .figure-slot.is-wide {
+      grid-column: 1 / -1;
+    }
+
+    .result-figure-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .rq4-figure-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .rq4-figure-grid .figure-slot img {
+      aspect-ratio: 1.08 / 1;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .sensitivity-figure {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .abstract-panel {
+      max-width: 870px;
+      margin: 0 auto;
+    }
+
+    .abstract-panel p {
+      color: var(--dinr-slate);
+      line-height: 1.78;
+      font-size: 1.02rem;
+    }
+
+    .contribution-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.35rem;
+    }
+
+    .contribution-item {
+      border-left: 3px solid var(--dinr-cyan);
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 0.95rem 1rem;
+      color: var(--dinr-slate);
+      box-shadow: 0 10px 28px rgba(15, 35, 56, 0.06);
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+      align-items: stretch;
+    }
+
+    .method-card {
+      padding: 1.35rem;
+    }
+
+    .method-card h3,
+    .rq-card h3,
+    .gif-card h3 {
+      color: var(--dinr-navy);
+      font-size: 1.28rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .method-card.is-dinr {
+      border-color: rgba(8, 167, 196, 0.38);
+      box-shadow: 0 18px 45px rgba(8, 167, 196, 0.13);
+    }
+
+    .pipeline-list {
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .pipeline-list span {
+      display: block;
+      border: 1px solid var(--dinr-line);
+      border-radius: 8px;
+      padding: 0.75rem 0.85rem;
+      color: var(--dinr-slate);
+      background: #f9fbfe;
+      font-weight: 700;
+    }
+
+    .ke-callout {
+      margin-top: 1.2rem;
+      border-radius: 8px;
+      border: 1px solid rgba(31, 157, 119, 0.28);
+      background: #f0fbf7;
+      padding: 1rem 1.1rem;
+      color: #205544;
+      line-height: 1.62;
+    }
+
+    .rq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .rq-card {
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .rq-card.is-wide {
+      grid-column: span 2;
+    }
+
+    .rq-kicker {
+      color: var(--dinr-cyan);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .chip-row {
+      justify-content: flex-start;
+      gap: 0.45rem;
+    }
+
+    .metric-chip {
+      box-shadow: none;
+      border-color: #d8e7f7;
+      background: #f8fbff;
+      color: var(--dinr-slate);
+    }
+
+    .gain-grid,
+    .takeaway-grid,
+    .figure-grid {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .gain-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .takeaway-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .rq-card.is-wide > .takeaway-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .figure-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gain-tile,
+    .takeaway-tile {
+      border: 1px solid var(--dinr-line);
+      border-radius: 8px;
+      padding: 0.9rem;
+      background: #f9fbfe;
+      color: var(--dinr-slate);
+      line-height: 1.48;
+    }
+
+    .gain-tile strong,
+    .takeaway-tile strong {
+      display: block;
+      color: var(--dinr-navy);
+      margin-bottom: 0.35rem;
+    }
+
+    .gain-tile .arrow {
+      color: var(--dinr-green);
+      font-weight: 900;
+    }
+
+    .gallery-intro {
+      max-width: 780px;
+      margin: 0 auto 1.6rem;
+      color: var(--dinr-slate);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .gif-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .gif-card {
+      overflow: hidden;
+    }
+
+    .gif-card h3 {
+      font-size: 1rem;
+      padding: 1rem 1rem 0;
+      margin-bottom: 0.7rem;
+    }
+
+    .gif-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-top: 1px solid var(--dinr-line);
+      border-bottom: 1px solid var(--dinr-line);
+      background: #f8fbff;
+    }
+
+    .gif-card figcaption {
+      color: var(--dinr-slate);
+      font-size: 0.88rem;
+      line-height: 1.52;
+      padding: 0.9rem 1rem 1rem;
+    }
+
+    .limitations-panel {
+      max-width: 860px;
+      margin: 0 auto;
+      border-radius: 8px;
+      border: 1px solid #f0dfbd;
+      background: #fffbf2;
+      padding: 1.35rem 1.5rem;
+    }
+
+    .limitations-panel h2 {
+      color: var(--dinr-navy);
+      font-size: 1.65rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .bibtex-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .bibtex-box {
+      border-radius: 8px;
+      border: 1px solid var(--dinr-line);
+      background: #101b2b;
+      color: #eaf2ff;
+      box-shadow: var(--dinr-shadow);
+    }
+
+    .bibtex-box code {
+      color: #eaf2ff;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .copy-button {
+      border-color: #c7d7ee;
+      color: var(--dinr-navy);
+      font-weight: 700;
+    }
+
+    .footer {
+      background: #f8fafc;
+      border-top: 1px solid var(--dinr-line);
+      padding: 2.2rem 1.5rem;
+    }
+
+    .footer .content {
+      color: var(--dinr-muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 1023px) {
+      .stat-grid,
+      .gif-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .gain-grid,
+      .takeaway-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rq4-figure-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .rq-card.is-wide > .takeaway-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .project-hero .hero-body {
+        padding: 3rem 1rem 2.6rem;
+      }
+
+      .publication-title {
+        font-size: 2.05rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+      }
+
+      .section-block {
+        padding: 3rem 1rem;
+      }
+
+      .section-heading h2,
+      .section-title {
+        font-size: 1.62rem;
+      }
+
+      .stat-grid,
+      .contribution-list,
+      .method-grid,
+      .rq-grid,
+      .figure-grid,
+      .result-figure-grid,
+      .gif-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rq4-figure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rq-card.is-wide {
+        grid-column: auto;
+      }
+
+      .project-nav .nav-inner {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding: 0.6rem 1rem;
+      }
+
+      .project-nav a {
+        white-space: nowrap;
+      }
+
+      .bibtex-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
@@ -42,47 +660,60 @@
   <script src="../../assets/js/project-page.js"></script>
 </head>
 <body>
+  <nav class="project-nav" aria-label="Project page navigation">
+    <div class="container is-max-desktop nav-inner">
+      <a href="#overview">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#ablations">Ablations</a>
+      <a href="#BibTeX">BibTeX</a>
+    </div>
+  </nav>
 
-
-  <section class="hero">
+  <section class="hero project-hero" id="overview">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 style="font-size: 41px;" class="title is-1 publication-title">DINR: Dynamical Implicit Neural Representations</h1>
-              
+            <h1 class="title is-1 publication-title">DINR: Dynamical Implicit Neural Representations</h1>
+
             <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block"><a href="https://openreview.net/profile?id=~Yesom_Park1" target="_blank">Yesom Park</a><sup>1</sup>,</span>
-              <span class="author-block"><a href="https://openreview.net/profile?id=~Kelvin_Kan1" target="_blank">Kelvin Kan</a><sup>1</sup>,</span>
-              <span class="author-block"><a href="https://thomasflynn.org/" target="_blank">Thomas Flynn</a><sup>2</sup>,</span>   
-              <span class="author-block"><a href="https://pphuangyi.github.io/" target="_blank">Yi Huang</a><sup>2</sup>,</span>             
-              <span class="author-block"><a href="https://www.bnl.gov/staff/sjyoo" target="_blank">Shinjae Yoo</a><sup>2</sup>,</span>
-              <span class="author-block"><a href="https://www.math.ucla.edu/~sjo/" target="_blank">Stanley Osher</a><sup>2</sup>,</span>              
-              <span class="author-block"><a href="https://xihaier.github.io/" target="_blank">Xihaier Luo</a><sup>2</sup></span>                  
+              <span class="author-block"><a href="https://openreview.net/profile?id=~Yesom_Park1" target="_blank" rel="noopener">Yesom Park</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://openreview.net/profile?id=~Kelvin_Kan1" target="_blank" rel="noopener">Kelvin Kan</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://thomasflynn.org/" target="_blank" rel="noopener">Thomas Flynn</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://pphuangyi.github.io/" target="_blank" rel="noopener">Yi Huang</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://www.bnl.gov/staff/sjyoo" target="_blank" rel="noopener">Shinjae Yoo</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://www.math.ucla.edu/~sjo/" target="_blank" rel="noopener">Stanley Osher</a><sup>2</sup>,</span>
+              <span class="author-block"><a href="https://xihaier.github.io/" target="_blank" rel="noopener">Xihaier Luo</a><sup>2</sup></span>
             </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block"><sup>1</sup>University of California, Los Angeles<br><sup>2</sup>Brookhaven National Laboratory</span>
-                  </div>
+            <div class="is-size-5 publication-authors affiliations">
+              <span class="author-block"><sup>1</sup>University of California, Los Angeles<br><sup>2</sup>Brookhaven National Laboratory</span>
+            </div>
 
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
+            <p class="tagline">
+              DINR replaces static coordinate-to-signal mappings with continuous latent dynamics, improving expressivity, trainability, and high-frequency reconstruction.
+            </p>
 
-                  <span class="link-block">
-                    <a href="https://github.com/Xihaier/DINR" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
+            <div class="tag-row" aria-label="DINR highlights">
+              <span class="paper-pill">Model-agnostic</span>
+              <span class="paper-pill">Latent ODE</span>
+              <span class="paper-pill">High-frequency fidelity</span>
+              <span class="paper-pill">Parameter-efficient</span>
+            </div>
 
-                <!-- ArXiv abstract Link -->
-                <span class="link-block">
-                  <a href="https://github.com/Xihaier/DINR" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
+            <div class="publication-links hero-links">
+              <span class="link-block">
+                <a href="https://github.com/Xihaier/DINR" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2511.21787" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
                   </span>
@@ -90,162 +721,382 @@
                 </a>
               </span>
             </div>
+
+            <div class="stat-grid" aria-label="Paper scope">
+              <div class="stat-card">
+                <span class="stat-label">Backbones</span>
+                <span class="stat-value">FFNet, SIREN, WIRE, FINER</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Tasks</span>
+                <span class="stat-value">2D images, turbulence, weather, sparse 3D</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Theory</span>
+                <span class="stat-value">Rademacher complexity + NTK</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Regularization</span>
+                <span class="stat-value">Kinetic energy</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-
-<!-- Teaser video-->
-<!-- <section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <img width="100%" src="imgs/problem.gif" style="display: block; margin-left: auto; margin-right: auto;">
-    </div>
-  </div>
-</section> -->
-<!-- End teaser video -->
-
-
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Implicit Neural Representations (INRs) provide a powerful continuous framework for modeling complex visual and geometric signals, but spectral bias remains a fundamental challenge, limiting their ability to capture high-frequency details. Orthogonal to existing remedy strategies, we introduce Dynamical Implicit Neural Representations (DINR), a new INR modeling framework that treats feature evolution as a continuous-time dynamical system rather than a discrete stack of layers. This dynamical formulation mitigates spectral bias by enabling richer, more adaptive frequency representations through continuous feature evolution. Theoretical analysis based on Rademacher complexity and the Neural Tangent Kernel demonstrates that DINR enhances expressivity and improves training dynamics. Moreover, regularizing the complexity of the underlying dynamics provides a principled way to balance expressivity and generalization. Extensive experiments on image representation, field reconstruction, and data compression confirm that DINR delivers more stable convergence, higher signal fidelity, and stronger generalization than conventional static INRs.
+  <section class="section section-block" id="teaser">
+    <div class="container is-max-desktop">
+      <div class="columns is-vcentered is-variable is-6">
+        <div class="column is-5">
+          <span class="eyebrow">Visual Overview</span>
+          <h2 class="section-title">Static mappings become latent trajectories.</h2>
+          <p class="overview-copy">
+            Instead of sending each coordinate through a fixed feedforward transformation, DINR evolves embedded coordinates along a learned continuous-time path before decoding the final signal value.
           </p>
+          <p class="caption">
+            Static INRs map coordinates through a fixed feedforward transformation; DINR evolves latent features along a learned trajectory before decoding the signal.
+          </p>
+        </div>
+        <div class="column">
+          <figure class="figure-slot">
+            <img src="imgs/dinr_overview.png" alt="DINR network design comparing a static latent mapping with dynamic latent evolution and shared vector-field updates" loading="lazy">
+            <figcaption>DINR replaces a static latent stack with a shared vector field that evolves features before decoding the output signal.</figcaption>
+          </figure>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- End paper abstract -->
+  </section>
 
-<!-- Introduction -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Introduction</h2>
-      <div>
-        Modern science is awash with rich, high-resolution data, from turbulent flows and weather fields to 3D volumes and complex visual scenes, but turning all of this into compact, faithful digital representations is still surprisingly hard ⚙️. Our project tackles this challenge with Dynamical Implicit Neural Representations (DINR), a new approach that treats learned features not as a static output of a network, but as a smooth trajectory evolving in time under a learned dynamical system. By letting representations “flow” through this continuous evolution, DINR can naturally capture fine, high-frequency details that standard neural fields struggle with, while remaining compact, stable, and data-efficient 🚀.
+  <section class="section section-block section-soft" id="abstract">
+    <div class="container is-max-desktop">
+      <div class="section-heading">
+        <span class="eyebrow">Abstract</span>
+        <h2>Continuous dynamics for sharper neural fields.</h2>
+      </div>
+      <div class="abstract-panel">
+        <p>
+          Implicit Neural Representations (INRs) provide a powerful continuous framework for modeling complex visual and geometric signals, but spectral bias remains a fundamental challenge, limiting their ability to capture high-frequency details. Orthogonal to existing remedy strategies, we introduce Dynamical Implicit Neural Representations (DINR), a new INR modeling framework that treats feature evolution as a continuous-time dynamical system rather than a discrete stack of layers. This dynamical formulation mitigates spectral bias by enabling richer, more adaptive frequency representations through continuous feature evolution. Theoretical analysis based on Rademacher complexity and the Neural Tangent Kernel demonstrates that DINR enhances expressivity and improves training dynamics. Moreover, regularizing the complexity of the underlying dynamics provides a principled way to balance expressivity and generalization. Extensive experiments on image representation, field reconstruction, and data compression confirm that DINR delivers more stable convergence, higher signal fidelity, and stronger generalization than conventional static INRs.
+        </p>
+        <div class="contribution-list" aria-label="Key contributions">
+          <div class="contribution-item">Controlled latent dynamics for INRs.</div>
+          <div class="contribution-item">Better expressivity and training dynamics.</div>
+          <div class="contribution-item">Strong results across images, scientific fields, compression, and sparse 3D data.</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- Introduction -->
+  </section>
 
-<!-- Method -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Method</h2>
-      <div>
-        The proposed method, Dynamical Implicit Neural Representations (DINR), upgrades standard coordinate-based INRs by replacing their one-shot latent mapping with a learned continuous-time flow in feature space. Given an input coordinate, DINR first embeds it into a latent vector and then treats that vector as the initial condition of a neural ODE: a small network defines a vector field that drives how the latent state evolves over an artificial “time” axis, and an ODE solver follows this trajectory to a final state that is decoded into the target signal value. This viewpoint turns the middle of the network into many tiny, coupled transformations rather than a fixed stack of layers, greatly enlarging the class of functions the model can represent and allowing fine, high-frequency structure to emerge gradually along the trajectory. To keep these dynamics smooth, stable, and physically intuitive, we introduce a kinetic-energy regularizer that penalizes unnecessarily fast or twisting motion in feature space, encouraging efficient latent paths that still retain expressive power while adding almost no computational overhead. The full DINR model is trained end-to-end with a standard reconstruction loss plus this regularizer, yielding a plug-and-play, model-agnostic module that injects rich latent dynamics into existing INR backbones without increasing their depth or parameter count. 
+  <section class="section section-block" id="method">
+    <div class="container is-max-desktop">
+      <div class="section-heading">
+        <span class="eyebrow">Method</span>
+        <h2>From Static Mappings to Latent Dynamics</h2>
+        <p>
+          DINR is a plug-and-play dynamical layer for coordinate-based representations. The same coordinate input becomes an evolving latent state, and the learned vector field is shared across the trajectory.
+        </p>
+      </div>
 
+      <div class="method-grid">
+        <article class="method-card">
+          <h3>Static INR</h3>
+          <p class="rq-copy">A conventional INR maps coordinates to a signal through a single fixed-depth transformation.</p>
+          <div class="pipeline-list" aria-label="Static INR pipeline">
+            <span>coordinate</span>
+            <span>embedding</span>
+            <span>static latent mapping</span>
+            <span>decoder</span>
+          </div>
+          <p class="caption">Single pass, fixed-depth transformation.</p>
+        </article>
+
+        <article class="method-card is-dinr">
+          <h3>DINR</h3>
+          <p class="rq-copy">DINR turns the latent representation into an initial condition for a neural ODE, then decodes the final state.</p>
+          <div class="pipeline-list" aria-label="DINR pipeline">
+            <span>coordinate</span>
+            <span>embedding</span>
+            <span>latent ODE trajectory</span>
+            <span>decoder</span>
+          </div>
+          <p class="caption">Iterative trajectory updates with a shared vector field.</p>
+        </article>
+      </div>
+
+      <div class="ke-callout">
+        <strong>KE regularization.</strong>
+        Kinetic-energy regularization discourages overly fast or irregular latent motion, encouraging smoother trajectories and better generalization.
       </div>
     </div>
-  </div>
-</section>
-<!-- Method -->
+  </section>
 
+  <section class="section section-block section-soft" id="results">
+    <div class="container is-max-desktop">
+      <div class="section-heading">
+        <span class="eyebrow">Results</span>
+        <h2>Experiments: Six Questions, One Pattern</h2>
+        <p>
+          Across representation quality, scientific compression, sparse 3D reconstruction, optimization behavior, regularization, and sensitivity, DINR consistently improves static INR backbones.
+        </p>
+      </div>
 
+      <div class="rq-grid">
+        <article class="rq-card is-wide">
+          <span class="rq-kicker">RQ1</span>
+          <h3>Representation quality on standard benchmarks</h3>
+          <p class="rq-copy">
+            DINR improves PSNR/SSIM across FFNet, SIREN, WIRE, and FINER backbones on DIV2K/Kodak-style image representation tasks.
+          </p>
+          <div class="chip-row" aria-label="Representative image benchmark gains">
+            <span class="metric-chip">+2.36 dB FINER scene 1</span>
+            <span class="metric-chip">+1.10 dB FINER scene 2</span>
+            <span class="metric-chip">PSNR &uarr; / SSIM &uarr;</span>
+          </div>
+          <figure class="figure-slot">
+            <img src="imgs/rq1_div2k_kodak.png" alt="DIV2K and Kodak image representation results comparing INR and DINR reconstructions for FFNet, SIREN, WIRE, and FINER" loading="lazy">
+            <figcaption>Across INR backbones, DINR improves reconstruction quality and reduces residual error on image representation benchmarks.</figcaption>
+          </figure>
+        </article>
 
-<!-- Model -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Results</h2>
-      <div>
-<div style="display: flex; justify-content: center; gap: 1px; align-items: flex-start;">
-  <div style="text-align: center;">
-    <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">FFNet</div>
-    <img src="imgs/FFNet.gif" style="width: 90%;">
-  </div>
+        <article class="rq-card is-wide">
+          <span class="rq-kicker">RQ2</span>
+          <h3>Compact scientific data representation</h3>
+          <p class="rq-copy">
+            DINR reduces model size and improves compression by sharing parameters across repeated latent-dynamics evaluations, while preserving visual and spectral fidelity.
+          </p>
+          <div class="gain-grid" aria-label="Representative compression gains">
+            <div class="gain-tile">
+              <strong>FFNet turbulence</strong>
+              727,297 <span class="arrow">&rarr;</span> 465,939 params<br>
+              1.44x <span class="arrow">&rarr;</span> 2.25x compression
+            </div>
+            <div class="gain-tile">
+              <strong>FFNet weather</strong>
+              892,417 <span class="arrow">&rarr;</span> 599,065 params<br>
+              1.16x <span class="arrow">&rarr;</span> 1.73x compression
+            </div>
+            <div class="gain-tile">
+              <strong>FINER turbulence</strong>
+              198,401 <span class="arrow">&rarr;</span> 150,343 params<br>
+              5.29x <span class="arrow">&rarr;</span> 6.97x compression
+            </div>
+          </div>
+          <p class="caption">
+            Visual and spectral comparisons include prediction, error map, and 2D power spectrum.
+          </p>
+          <figure class="figure-slot">
+            <img src="imgs/rq2_compression_spectra.png" alt="Turbulence and weather-field compression comparison showing FFNet and Dynamical FFNet predictions, prediction errors, and two-dimensional power spectra" loading="lazy">
+            <figcaption>The 2D power spectra show that DINR better preserves high-frequency energy than static INR baselines, helping explain its improved fidelity on turbulence and weather-field compression.</figcaption>
+          </figure>
+        </article>
 
-  <div style="text-align: center;">
-    <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">Dynamical FFNet</div>
-    <img src="imgs/OCFFNet.gif" style="width: 90%;">
-  </div>
-</div>
+        <article class="rq-card is-wide">
+          <span class="rq-kicker">RQ3</span>
+          <h3>Sparse 3D reconstruction</h3>
+          <div class="gain-grid" aria-label="Sparse 3D reconstruction takeaways">
+            <div class="gain-tile">
+              <strong>Cryo-EM</strong>
+              Dynamical FFNet improves the FSC=0.5 cutoff from 0.425 to 0.587.
+            </div>
+            <div class="gain-tile">
+              <strong>Cloud</strong>
+              Dynamical variants better preserve filamentary, localized 3D structures.
+            </div>
+            <div class="gain-tile">
+              <strong>Pattern</strong>
+              Latent dynamics help reconstruct missing structure from sparse samples.
+            </div>
+          </div>
+          <div class="figure-grid">
+            <figure class="figure-slot">
+              <img src="imgs/FSC.png" alt="Fourier shell correlation curves showing Dynamical FFNet reaches the FSC 0.5 threshold at 0.587 compared with 0.425 for FFNet" loading="lazy">
+              <figcaption>FSC analysis shows a higher spatial-frequency cutoff for Dynamical FFNet.</figcaption>
+            </figure>
+            <figure class="figure-slot">
+              <img src="imgs/rq3_cloud.png" alt="Sparse cloud reconstruction comparing ground truth, FFNet, Dynamical FFNet, SIREN, and Dynamical SIREN volumes" loading="lazy">
+              <figcaption>Dynamical variants better preserve localized cloud structures than their static counterparts.</figcaption>
+            </figure>
+          </div>
+        </article>
 
-<div style="display: flex; justify-content: center; gap: 1px; align-items: flex-start;">
-  <div style="text-align: center;">
-    <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">SIREN</div>
-    <img src="imgs/SIREN.gif" style="width: 90%;">
-  </div>
+        <article class="rq-card is-wide">
+          <span class="rq-kicker">RQ4</span>
+          <h3>Training dynamics and NTK</h3>
+          <div class="takeaway-grid" aria-label="Training dynamics takeaways">
+            <div class="takeaway-tile"><strong>Faster convergence</strong> Latent dynamics accelerate optimization.</div>
+            <div class="takeaway-tile"><strong>Higher effective NTK rank</strong> DINR broadens the active training directions.</div>
+            <div class="takeaway-tile"><strong>Better conditioning</strong> Lower condition number and broader eigenspectrum.</div>
+          </div>
+          <div class="result-figure-grid rq4-figure-grid">
+            <figure class="figure-slot">
+              <img src="imgs/optimization.png" alt="Training error curves showing Dynamical FFNet converges faster and lower than FFNet on turbulence, Kodak, and DIV2K" loading="lazy">
+              <figcaption>Dynamical FFNet reaches lower error more quickly across turbulence, Kodak, and DIV2K training runs.</figcaption>
+            </figure>
+            <figure class="figure-slot">
+              <img src="imgs/ffnet_condition_number.png" alt="FFNet NTK condition number comparison showing DINR maintains a much lower condition number over training" loading="lazy">
+              <figcaption>FFNet condition number remains far lower with latent dynamics.</figcaption>
+            </figure>
+            <figure class="figure-slot">
+              <img src="imgs/siren_condition_number.png" alt="SIREN NTK condition number comparison showing lower conditioning for the dynamical variant" loading="lazy">
+              <figcaption>SIREN also benefits from better NTK conditioning under DINR.</figcaption>
+            </figure>
+            <figure class="figure-slot">
+              <img src="imgs/ffnet_effective_rank.png" alt="FFNet effective rank comparison showing Dynamical FFNet maintains a much higher effective NTK rank" loading="lazy">
+              <figcaption>Dynamical FFNet keeps many more effective NTK directions active.</figcaption>
+            </figure>
+            <figure class="figure-slot">
+              <img src="imgs/siren_effective_rank.png" alt="SIREN effective rank comparison showing the dynamical variant has a higher effective rank" loading="lazy">
+              <figcaption>Dynamical SIREN similarly preserves a higher effective rank.</figcaption>
+            </figure>
+            <figure class="figure-slot">
+              <img src="imgs/ffnet_eigenvalues_lognormal_epoch_100.png" alt="Representative FFNet NTK eigenvalue distribution showing a broader eigenspectrum for Dynamical FFNet" loading="lazy">
+              <figcaption>A representative final-epoch eigenspectrum shows broader active eigenvalue support for the dynamical model.</figcaption>
+            </figure>
+          </div>
+        </article>
 
-  <div style="text-align: center;">
-    <div style="margin-top: 1px; font-size: 25px; font-weight: bold;">Dynamical SIREN</div>
-    <img src="imgs/OCSIREN.gif" style="width: 90%;">
-  </div>
-</div>
+        <article class="rq-card is-wide" id="ablations">
+          <span class="rq-kicker">RQ5</span>
+          <h3>KE regularization ablation</h3>
+          <div class="takeaway-grid" aria-label="Kinetic energy regularization takeaways">
+            <div class="takeaway-tile"><strong>Noise robustness</strong> KE lowers FFNet error by up to 18.3%.</div>
+            <div class="takeaway-tile"><strong>Scarce data</strong> With SIREN and only 25% data, relative error drops by 64.8%.</div>
+            <div class="takeaway-tile"><strong>Smoother dynamics</strong> The latent path stays expressive without becoming irregular.</div>
+          </div>
+          <div class="result-figure-grid">
+            <figure class="figure-slot">
+              <img src="imgs/rq5_noisy_data.png" alt="Noise ablation box plots comparing static, dynamical without KE, and dynamical with KE regularization for FFNet and SIREN" loading="lazy">
+              <figcaption>KE regularization improves robustness as the input noise level increases.</figcaption>
+            </figure>
+            <figure class="figure-slot">
+              <img src="imgs/rq5_scarce_data.png" alt="Scarce data ablation box plots comparing static, dynamical without KE, and dynamical with KE regularization for FFNet and SIREN" loading="lazy">
+              <figcaption>With less training data, KE-regularized DINR lowers relative error for both FFNet and SIREN.</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="rq-card is-wide">
+          <span class="rq-kicker">RQ6</span>
+          <h3>Sensitivity analysis</h3>
+          <p class="rq-copy">
+            More ODE integration steps generally improve performance; overly strong KE regularization can over-constrain the dynamics.
+          </p>
+          <figure class="figure-slot sensitivity-figure">
+            <img src="imgs/sensitivity_Dynamical_FFNet.png" alt="Sensitivity heatmap showing loss across ODE integration steps and kinetic energy regularization strengths for Dynamical FFNet" loading="lazy">
+            <figcaption>Performance improves with more integration steps, while very strong kinetic-energy regularization can over-constrain the latent dynamics.</figcaption>
+          </figure>
+        </article>
       </div>
     </div>
-  </div>
-</section>
-<!-- Model -->
+  </section>
 
-
-
-<!-- Method -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Next Steps</h2>
-      <div>
-        For future work, it is important to address the increased computational cost of the dynamical structure, potentially by exploring adaptive step-size or higher-order ODE integration to balance expressivity and efficiency. Extending DINR to multi-modal and large-scale datasets could broaden its practical applicability. Given the observed effectiveness of dynamical neural architectures in time-series and generative modeling, exploring a unified understanding of such architectures could provide valuable insights and guide the design of more effective models across diverse tasks. Finally, a more rigorous theoretical study of the interplay between latent dynamics, expressivity, and generalization would yield deeper insights into the framework and guide the design of even more powerful INRs.
+  <section class="section section-block" id="gallery">
+    <div class="container is-max-desktop">
+      <div class="section-heading">
+        <span class="eyebrow">Qualitative Comparison</span>
+      </div>
+      <p class="gallery-intro">
+        The training animations show the same baseline backbones before and after adding dynamical latent evolution. Watch for sharper high-frequency details and more faithful reconstruction in the dynamical variants.
+      </p>
+      <div class="gif-grid">
+        <figure class="gif-card">
+          <h3>FFNet</h3>
+          <img src="imgs/FFNet.gif" alt="Animated FFNet reconstruction comparison" loading="lazy">
+          <figcaption>Static FFNet provides a compact coordinate mapping but can smooth fine detail.</figcaption>
+        </figure>
+        <figure class="gif-card">
+          <h3>Dynamical FFNet</h3>
+          <img src="imgs/OCFFNet.gif" alt="Animated Dynamical FFNet reconstruction comparison" loading="lazy">
+          <figcaption>DINR adds latent evolution, improving detail recovery without changing the viewing task.</figcaption>
+        </figure>
+        <figure class="gif-card">
+          <h3>SIREN</h3>
+          <img src="imgs/SIREN.gif" alt="Animated SIREN reconstruction comparison" loading="lazy">
+          <figcaption>Static periodic activations capture structure, but optimization can remain uneven.</figcaption>
+        </figure>
+        <figure class="gif-card">
+          <h3>Dynamical SIREN</h3>
+          <img src="imgs/OCSIREN.gif" alt="Animated Dynamical SIREN reconstruction comparison" loading="lazy">
+          <figcaption>The dynamical variant encourages richer feature evolution and stronger fidelity.</figcaption>
+        </figure>
       </div>
     </div>
-  </div>
-</section>
-<!-- Method -->
+  </section>
 
+  <section class="section section-block section-soft" id="limitations">
+    <div class="container is-max-desktop">
+      <div class="limitations-panel">
+        <h2>Limitations and Future Directions</h2>
+        <p class="limitations-copy">
+          DINR has higher per-iteration cost because the shared dynamical module is evaluated repeatedly along the latent trajectory. Future work can explore adaptive step-size solvers, higher-order integration, and more efficient implementations, while extending the framework to large-scale and multimodal datasets.
+        </p>
+      </div>
+    </div>
+  </section>
 
-
-
-
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
+  <section class="section section-block" id="BibTeX">
     <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@article{park2025dynamical,
+      <div class="bibtex-header">
+        <h2 class="title is-3">BibTeX</h2>
+        <button class="button is-small copy-button" type="button" data-copy-target="bibtex-code" aria-label="Copy BibTeX citation">Copy BibTeX</button>
+      </div>
+      <pre class="bibtex-box"><code id="bibtex-code">@article{park2025dynamical,
   title={Dynamical Implicit Neural Representations},
   author={Park, Yesom and Kan, Kelvin and Flynn, Thomas and Huang, Yi and Yoo, Shinjae and Osher, Stanley and Luo, Xihaier},
   journal={arXiv preprint arXiv:2511.21787},
   year={2025}
-        }</code></pre>
+}</code></pre>
     </div>
-</section>
-<!--End BibTex citation -->
-
+  </section>
 
   <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          
-            <p style="text-align: center;">"惟独从上头来的智慧，先是清洁，后是和平，温良柔顺，满有怜悯，多结善果，没有偏见，没有假冒。" - 雅各书 3:17</p>
-            <p style="text-align: center;">"But the wisdom that is from above is first pure, then peaceable, gentle, and easy to be intreated, full of mercy and good fruits, without partiality, and without hypocrisy." - James 3:17</p>
-
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>"惟独从上头来的智慧，先是清洁，后是和平，温良柔顺，满有怜悯，多结善果，没有偏见，没有假冒。" - 雅各书 3:17</p>
+            <p>"But the wisdom that is from above is first pure, then peaceable, gentle, and easy to be intreated, full of mercy and good fruits, without partiality, and without hypocrisy." - James 3:17</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-  </body>
-  </html>
+  <script>
+    document.querySelectorAll("[data-copy-target]").forEach(function(button) {
+      button.addEventListener("click", function() {
+        var target = document.getElementById(button.getAttribute("data-copy-target"));
+        if (!target) {
+          return;
+        }
+
+        var text = target.innerText;
+        var setCopied = function() {
+          var original = button.innerText;
+          button.innerText = "Copied";
+          setTimeout(function() {
+            button.innerText = original;
+          }, 1600);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(setCopied);
+          return;
+        }
+
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "absolute";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        setCopied();
+      });
+    });
+  </script>
+</body>
+</html>
